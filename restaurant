@@ -6,6 +6,11 @@ entrada(consomé).
 carne(filete_de_cerdo).
 carne(pollo_asado).
 
+bebida(vino).
+bebida(cerveza).
+bebida(agua).
+
+
 pescado(trucha).
 pescado(bacalao).
 
@@ -35,3 +40,10 @@ menu_con_consome(Entrada,Plato_p,Postre):-
 menu_sin_postre(Entrada,Plato_p,Postre):-
     menu(Entrada, Plato_p,Postre),
     Postre \== flan.
+
+menu_con_bebida(Entrada,Plato_p,Postre,Bebida):-
+    entrada(Entrada),
+    plato_principal(Plato_p),
+    postre(Postre),
+    bebida(Bebida).
+ 
