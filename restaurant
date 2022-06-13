@@ -1,0 +1,37 @@
+%clauses
+entrada(paella).
+entrada(gazpacho).
+entrada(consomé).
+
+carne(filete_de_cerdo).
+carne(pollo_asado).
+
+pescado(trucha).
+pescado(bacalao).
+
+postre(flan).
+postre(helado).
+postre(pastel).
+%fin clauses
+
+%a) ¿Cuáles son los menús que ofrece el restaurante?
+
+plato_principal(Plato):-
+carne(Plato);
+pescado(Plato).
+
+menu(Entrada,Plato_p,Postre):-
+    entrada(Entrada),
+    plato_principal(Plato_p),
+    postre(Postre).
+
+%b) ¿Cuáles son los menús que tienen Consomé en las entradas?
+menu_con_consome(Entrada,Plato_p,Postre):-
+    Entrada = consomé,
+    plato_principal(Plato_p),
+    postre(Postre).
+
+%c) ¿Cuáles son los menús que no contienen flan como postre?
+menu_sin_postre(Entrada,Plato_p,Postre):-
+    menu(Entrada, Plato_p,Postre),
+    Postre \== flan.
