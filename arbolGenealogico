@@ -5,6 +5,7 @@ niño(manuel,pedro).
 hija(maría,pedro).
 hermano(manuel,maría).
 hermano(maría,manuel).
+hermano-o-hermana(maría,maría).
 %
 
 hombre(pedro).
@@ -37,9 +38,11 @@ hermano-o-hermana(X,Y):-
 hermano(X,Y):-
     padre(Z,X),
     padre(Z,Y),
-    hombre(X).
+    hombre(X),
+    X\==Y.
 %hermana(X,Y) //expresa que X es una hermana de Y.
 hermana(X,Y):-
     padre(Z,X),
     padre(Z,Y),
-    mujer(X).
+    mujer(X),
+    X\==Y.
