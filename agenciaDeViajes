@@ -1,0 +1,33 @@
+%queries
+viaje(Ciudad,4,Alojamiento,Precio_Total).
+viaje_economico(Ciudad,4,Alojamiento,Precio_Total,200).
+viaje_economico2(4,200).
+
+%clauses
+transporte(roma,20).
+transporte(londres,30).
+transporte(tunez,10).
+
+alojamiento(roma,hotel,50).
+alojamiento(roma,hostal,30).
+alojamiento(roma,camping,10).
+alojamiento(londres,hotel,60).
+alojamiento(londres,hostal,40).
+alojamiento(londres,camping,20).
+alojamiento(tunez,hotel,40).
+alojamiento(tunez,hostal,20).
+alojamiento(tunez,camping,5).
+%finclauses
+
+viaje(Ciudad,Semanas,Alojamiento,Precio_Total):-
+    transporte(Ciudad,Precio_transporte),
+    alojamiento(Ciudad,Alojamiento,Precio_Semana),
+    Precio_Total is (Semanas * Precio_Semana) + Precio_transporte.
+
+viaje_economico(Ciudad,Semanas,Alojamiento,Precio_Total,Pmax):-
+    viaje(Ciudad,Semanas,Alojamiento,Precio_Total),
+    Precio_Total =< Pmax.
+
+viaje_economico2(Semanas,Pmax):-
+    viaje(_,Semanas,_,Precio_Total),
+    Precio_Total =< Pmax.
