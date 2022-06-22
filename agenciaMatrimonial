@@ -1,3 +1,5 @@
+%conviene(paula,juan).
+
 hombre(juan,alto,negro,adulta).
 mujer(paula,media,rubio,adulta).
 
@@ -11,17 +13,23 @@ son_sexos_distintos(X,Y):-
     hombre(X,_,_,_),
     mujer(Y,_,_,_).
 
+son_sexos_distintos(X,Y):-
+    mujer(X,_,_,_),
+    hombre(Y,_,_,_).
+
 conviene(Mujer,Hombre):-
+    son_sexos_distintos(Mujer,Hombre),
     hombre(Hombre,Altura,Cabello,Edad),
     busca(Mujer,Altura,Cabello,Edad),
     mismosGustos(Mujer,Hombre).
 
 conviene(Hombre,Mujer):-
+     son_sexos_distintos(Hombre,Mujer),
     mujer(Mujer,Altura,Cabello,Edad),
     busca(Hombre,Altura,Cabello,Edad),
     mismosGustos(Hombre,Mujer).
 
 mismosGustos(X,Y):-
     gusta(X,Musica,Literatura,Deporte),
-    gusta(Y,Musica,Literatura,Deporte),
+    gusta(Y,Musica,Literatura,Deporte),    
     X\==Y.
