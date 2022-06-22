@@ -1,0 +1,70 @@
+%max(Y,X).
+
+parcial1(ana,7).
+parcial1(juan,4).
+parcial1(pedro,2).
+parcial1(ines,5).
+parcial1(pablo,10).
+parcial1(juana,10).
+parcial1(julia,2).
+parcial1(julio,2).
+
+parcial2(ana,9).
+parcial2(juan,8).
+parcial2(pedro,10).
+parcial2(ines,6).
+parcial2(pablo,5).
+parcial2(juana,10).
+parcial2(julia,2).
+parcial2(carla, 2).
+
+promociona(Alumno,NotaFinal):-
+    parcial1(Alumno,Nota1),
+    parcial2(Alumno,Nota2),
+    Nota1 >= 7, Nota2 >= 7,
+    NotaFinal is (Nota1 + Nota2) / 2.
+    %write(Alumno), write(" "), writeln(NotaFinal), fail.
+
+cursada(Alumno,NotaFinal):-
+    parcial1(Alumno,Nota1),
+    parcial2(Alumno,Nota2),
+    Nota1 >= 4, Nota2 >= 4,
+    NotaFinal is (Nota1 + Nota2) / 2,
+    ((Nota1 < 7, Nota2 >= 7); (Nota1 >= 7, Nota2 < 7); (Nota1 < 7, Nota2 < 7)),
+    write(Alumno), write(" "), writeln(NotaFinal), fail.
+
+recursan(Alumno):-
+    parcial1(Alumno,Nota1),
+    parcial2(Alumno,Nota2),
+ %   (Nota1 < 4; Nota2 < 4),
+    ((Nota1 < 4, Nota2 >= 7); (Nota1 >= 7, Nota2 < 4); (Nota1 < 4, Nota2 < 4)),
+    writeln(Alumno), fail.
+
+
+    
+ausente(Alumno):-
+    parcial1(Alumno,_), 
+    not(parcial2(Alumno,_));
+    parcial2(Alumno,_),
+    not(parcial1(Alumno,_)); 
+    not(parcial1(Alumno,_)), 
+    not(parcial2(Alumno,_)).
+
+producto_cartesiano(X,Y):-
+    promociona(_,X),
+    promociona(_,Y).
+
+menores(X):-
+    producto_cartesiano(X,Y),
+    X < Y.
+
+max(Y,X):-promociona(Y,X),
+    not(menores(X)).
+
+ausente2(Alumno):-
+    parcial1(Alumno,_), 
+    not(parcial2(Alumno,_));
+    not(parcial1(Alumno,_)),
+    parcial2(Alumno,_);
+    not(parcial1(Alumno,_)), 
+    not(parcial2(Alumno,_)).
