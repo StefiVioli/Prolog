@@ -1,0 +1,27 @@
+hombre(juan,alto,negro,adulta).
+mujer(paula,media,rubio,adulta).
+
+gusta(juan,pop,aventura,tenis).
+gusta(paula,pop,aventura,tenis).
+
+busca(juan,media,rubio,adulta).
+busca(paula,alto,negro,adulta).
+
+son_sexos_distintos(X,Y):-
+    hombre(X,_,_,_),
+    mujer(Y,_,_,_).
+
+conviene(Mujer,Hombre):-
+    hombre(Hombre,Altura,Cabello,Edad),
+    busca(Mujer,Altura,Cabello,Edad),
+    mismosGustos(Mujer,Hombre).
+
+conviene(Hombre,Mujer):-
+    mujer(Mujer,Altura,Cabello,Edad),
+    busca(Hombre,Altura,Cabello,Edad),
+    mismosGustos(Hombre,Mujer).
+
+mismosGustos(X,Y):-
+    gusta(X,Musica,Literatura,Deporte),
+    gusta(Y,Musica,Literatura,Deporte),
+    X\==Y.
