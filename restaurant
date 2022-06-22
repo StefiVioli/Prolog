@@ -19,6 +19,19 @@ postre(helado).
 postre(pastel).
 %fin clauses
 
+% calorias por plato
+ calorias(paella, 100).
+ calorias(gazpacho, 20).
+ calorias(consomé, 150).
+ calorias(filete_de_cerdo, 1000).
+ calorias(pollo_asado, 589).
+ calorias(trucha, 368).
+ calorias(bacalao, 258).
+ calorias(flan, 254).
+ calorias(helado, 369).
+ calorias(pastel, 458). 
+
+
 %a) ¿Cuáles son los menús que ofrece el restaurante?
 
 plato_principal(Plato):-
@@ -46,4 +59,13 @@ menu_con_bebida(Entrada,Plato_p,Postre,Bebida):-
     plato_principal(Plato_p),
     postre(Postre),
     bebida(Bebida).
- 
+
+calorias_menu(Entrada,Plato_p,Postre,CaloriasTot):-
+    calorias(Entrada,CantE),
+%    calorias(Plato_p,CantPpal),
+%    calorias(Postre,CantPostre),
+%    sumar(CantE,CantPpal,CantPostre,Total),
+    CaloriasTot is Total.
+
+sumarCalorias(X,Y,Z,T):-
+    T is X + Y + Z.
