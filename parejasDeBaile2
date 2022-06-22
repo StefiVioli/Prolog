@@ -1,0 +1,24 @@
+%falta el ritmo
+%pueden_formar_pareja(M,H).
+
+hombre(juan, tango, salsa). 
+hombre(alberto, merengue, salsa). 
+mujer(ana, salsa, cumbia).
+mujer(luisa, cumbia, tango).
+
+son_sexos_distintos(X,Y):-
+   hombre(X,_,_),
+   mujer(Y,_,_).
+
+son_sexos_distintos(X,Y):-
+   mujer(X,_,_),
+   hombre(Y,_,_).
+
+pueden_formar_pareja(Mujer,Hombre,Ritmo):-
+    son_sexos_distintos(Mujer,Hombre),
+    hombre(Hombre,HR1,HR2),
+    mujer(Mujer,MR1,MR2),
+    ((HR1 == MR1, HR2 == MR2), Ritmo = MR1; 
+    (HR1 == MR2), Ritmo = MR2; (HR2 == MR1), Ritmo = MR1).
+%    hombre == mujer.
+ %   ritmosCompatibles(Mujer,Hombre).
