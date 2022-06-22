@@ -61,12 +61,15 @@ menu_con_bebida(Entrada,Plato_p,Postre,Bebida):-
     postre(Postre),
     bebida(Bebida).
 
+cant_calorias(Entrada, Principal, Postre, Total):-
+ calorias(Entrada, CantE),
+ calorias(Principal, CantPpal),
+ calorias(Postre, CantPostre),
+ sumarCalorias(CantE,CantPpal,CantPostre,Total).
+ 
 calorias_menu(Entrada,Plato_p,Postre,CaloriasTot):-
-    calorias(Entrada,CantE),
-    calorias(Plato_p,CantPpal),
-    calorias(Postre,CantPostre),
-    sumarCalorias(CantE,CantPpal,CantPostre,Total),
-    CaloriasTot is Total.
+    menu(Entrada,Plato_p,Postre),
+    cant_calorias(Entrada,Plato_p,Postre,CaloriasTot).
 
 sumarCalorias(X,Y,Z,T):-
     T is X + Y + Z.
