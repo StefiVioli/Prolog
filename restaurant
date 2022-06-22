@@ -1,3 +1,4 @@
+%queries calorias_menu(X,Y,Z,W).
 %clauses
 entrada(paella).
 entrada(gazpacho).
@@ -62,9 +63,9 @@ menu_con_bebida(Entrada,Plato_p,Postre,Bebida):-
 
 calorias_menu(Entrada,Plato_p,Postre,CaloriasTot):-
     calorias(Entrada,CantE),
-%    calorias(Plato_p,CantPpal),
-%    calorias(Postre,CantPostre),
-%    sumar(CantE,CantPpal,CantPostre,Total),
+    calorias(Plato_p,CantPpal),
+    calorias(Postre,CantPostre),
+    sumarCalorias(CantE,CantPpal,CantPostre,Total),
     CaloriasTot is Total.
 
 sumarCalorias(X,Y,Z,T):-
