@@ -1,0 +1,13 @@
+potencia(X,1,X).
+
+potencia(N,P,R):-
+    P >= 0,
+    PN is P-1,
+    potencia(N,PN,R1),
+    R is R1 * N.
+
+
+/** <examples>
+?- potencia(2,4,R).
+?- potencia(5,5,3125).
+*/
