@@ -1,3 +1,4 @@
+%potencia(_,0,1).
 potencia(X,1,X).
 
 potencia(N,P,R):-
