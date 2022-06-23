@@ -1,0 +1,8 @@
+multiplicar(N1,_,0):-
+    N1 = 0.
+
+multiplicar(N1,N2,R):-
+    N1 > 0,
+    N is N1-1,
+    multiplicar(N,N2,R1),
+    R is N2+R1.
