@@ -1,0 +1,18 @@
+padre(pedro,juan).
+padre(manuel,pedro).
+
+es_antecesor(X,Y):-%es_antecesor(manuel,juan)
+    padre(X,Y).%juan es padre de manuel? no
+
+es_antecesor(X,Y):-%entra a antecesores
+    padre(X,Z),%busca a manuel como padre de alguien 
+               %encuentra que el padre de pedro es manuel, padre(manuel,pedro)
+               %entonces se fija si pedro es antecesor de juan
+               %le va a dar q es padre y corta
+    es_antecesor(Z,Y).
+
+/** <examples>
+?- es_antecesor(manuel,pedro).
+?- es_antecesor(pedro,juan).
+?- trace, (es_antecesor(manuel,juan)).
+*/
