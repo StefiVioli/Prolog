@@ -1,0 +1,88 @@
+%queries calorias_menu(X,Y,Z,W).
+%clauses
+entrada(paella).
+entrada(gazpacho).
+entrada(consomé).
+
+carne(filete_de_cerdo).
+carne(pollo_asado).
+
+bebida(vino).
+bebida(cerveza).
+bebida(agua).
+
+
+pescado(trucha).
+pescado(bacalao).
+
+postre(flan).
+postre(helado).
+postre(pastel).
+%fin clauses
+
+% calorias por plato
+ calorias(paella, 100).
+ calorias(gazpacho, 20).
+ calorias(consomé, 150).
+ calorias(filete_de_cerdo, 1000).
+ calorias(pollo_asado, 589).
+ calorias(trucha, 368).
+ calorias(bacalao, 258).
+ calorias(flan, 254).
+ calorias(helado, 369).
+ calorias(pastel, 458). 
+
+
+%a) ¿Cuáles son los menús que ofrece el restaurante?
+
+plato_principal(Plato):-
+carne(Plato);
+pescado(Plato).
+
+menu(Entrada,Plato_p,Postre):-
+    entrada(Entrada),
+    plato_principal(Plato_p),
+    postre(Postre).
+
+%b) ¿Cuáles son los menús que tienen Consomé en las entradas?
+menu_con_consome(Entrada,Plato_p,Postre):-
+    Entrada = consomé,
+    plato_principal(Plato_p),
+    postre(Postre).
+
+%c) ¿Cuáles son los menús que no contienen flan como postre?
+menu_sin_postre(Entrada,Plato_p,Postre):-
+    menu(Entrada, Plato_p,Postre),
+    Postre \== flan.
+
+menu_con_bebida(Entrada,Plato_p,Postre,Bebida):-
+    entrada(Entrada),
+    plato_principal(Plato_p),
+    postre(Postre),
+    bebida(Bebida).
+
+cant_calorias(Entrada, Principal, Postre, Total):-
+ calorias(Entrada, CantE),
+ calorias(Principal, CantPpal),
+ calorias(Postre, CantPostre),
+ sumarCalorias(CantE,CantPpal,CantPostre,Total).
+ 
+calorias_menu(Entrada,Plato_p,Postre,CaloriasTot):-
+    menu(Entrada,Plato_p,Postre),
+    cant_calorias(Entrada,Plato_p,Postre,CaloriasTot).
+
+sumarCalorias(X,Y,Z,T):-
+    T is X + Y + Z.
+
+producto_cartesiano(X,W):-
+    calorias_menu(_,_,_,X),
+    calorias_menu(_,_,_,W).
+
+mayores(X):-
+    producto_cartesiano(X,Y),
+    X > Y.
+
+min(E,P,Po,X):-
+    calorias_menu(E,P,Po,X),
+    not(mayores(X)).
+    
