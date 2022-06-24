@@ -1,17 +1,24 @@
 %vendedor(juan).
 ventasPrimerSemestre(juan,40000).
+ventasPrimerSemestre(pedro,10000).
 ventasSegundoSemestre(juan, 100000).
-ventasSegundoSemestre(clara, 100000000).
+ventasSegundoSemestre(pedro, 10000).
+ventasSegundoSemestre(clara, 100).
 
 calcularComisiones(Vendedor, Comision):-
     ventasPrimerSemestre(Vendedor,Vta1),
     ventasSegundoSemestre(Vendedor, Vta2),
     Vta1 > 20000, Vta2 > 20000,
-    Comision is (Vta1 + Vta2)*0.2;
-    ((Vta1 < 20000, Vta2 < 20000);(Vta1 < 20000, Vta2 >= 20000);(Vta1 >= 20000, Vta2 < 20000)),
-    Comision is (Vta1 + Vta2)*0.1;
-    sin_ventas(Vendedor),
-    Comision is (Vta1 + Vta2)*0.05.
+    Comision is (Vta1 + Vta2)*0.2.
+   
+calcularComisiones(Vendedor, Comision):-
+    ventasPrimerSemestre(Vendedor,Vta1),
+    ventasSegundoSemestre(Vendedor, Vta2),
+     ((Vta1 < 20000, Vta2 < 20000);(Vta1 < 20000, Vta2 >= 20000);(Vta1 >= 20000, Vta2 < 20000)),
+    Comision is (Vta1 + Vta2)*0.1.
+
+calcularComisiones(Vendedor, Comision):-
+    sin_ventas2(Vendedor,Comision).
 
 sin_ventas(Vendedor):-
     ventasPrimerSemestre(Vendedor,_),
@@ -20,3 +27,17 @@ sin_ventas(Vendedor):-
     not(ventasPrimerSemestre(Vendedor,_)); 
     not(ventasPrimerSemestre(Vendedor,_)), 
     not(ventasSegundoSemestre(Vendedor,_)).
+
+sin_ventas2(Vendedor,Comision):-
+    ventasPrimerSemestre(Vendedor, Vta1),
+    not(ventasSegundoSemestre(Vendedor, _)),
+    Comision is (Vta1)*0.05;
+    ventasSegundoSemestre(Vendedor, Vta2),
+    not(ventasPrimerSemestre(Vendedor,_)),
+    Comision is (Vta2)*0.05.
+
+/** <examples>
+?- calcularComisiones(Vendedor,X).
+?- calcularComisiones(clara,X).
+?- sin_ventas2(clara,_).
+*/
