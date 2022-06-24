@@ -1,0 +1,8 @@
+cociente(Dividendo,Divisor,0,_):-
+    Divisor > Dividendo.
+
+cociente(Dividendo,Divisor,Cociente,Resto):-
+    D2 is Dividendo-Divisor,
+    cociente(D2,Divisor,C1,Resto),
+    Cociente is C1+1,
+    Resto is Dividendo mod Divisor.
