@@ -1,0 +1,7 @@
+cociente(Dividendo,Divisor,0):-
+    Divisor > Dividendo.
+
+cociente(Dividendo,Divisor,Cociente):-
+    D2 is Dividendo-Divisor,
+    cociente(D2,Divisor,C1),
+    Cociente is C1+1.
