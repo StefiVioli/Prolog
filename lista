@@ -1,0 +1,63 @@
+reclista([]).
+% caso base para cuando hay solo cabeza y no cola
+reclista([Ca|Co]):-
+writeln(Ca),
+reclista(Co).
+
+
+
+reclistaInvertida([]).
+reclistaInvertida([Ca|Co]):-
+reclistaInvertida(Co),
+writeln(Ca).
+
+
+
+sumatoria([],0).
+sumatoria([Ca|Co],R):-
+sumatoria(Co,R1),
+R is R1 + Ca.
+
+
+
+contar([],0).
+contar([_|Co],R):-
+contar(Co,R1),
+R is R1 + 1.
+
+max_list([],0).
+
+max_list([Ca|Co],M):-
+    max_list(Co,M1),
+    (Ca > M1, M = Ca).
+
+min_list([],100000).
+
+min_list([Ca|Co],M):-
+    min_list(Co,M1),
+    (Ca < M1, M = Ca).
+
+list_min([L|Ls], Min) :-
+    list_min(Ls, L, Min).
+
+
+
+max2([R], R).
+max2([X|Xs], R):- 
+    max2(Xs, T), (X > T -> R = X ; R = T).
+
+maxlist([],0).
+
+maxlist([Ca|Co],Max) :-
+    maxlist(Co,Max2),
+    Ca > Max2,
+    Max is Ca.
+
+maxlist([Ca|Co],Max) :-
+    maxlist(Co,Max2),
+    Ca =< Max2,
+    Max is Max2.
+
+/** <examples>
+?- maxlist([1,2,3,4,5,6],Maxi).
+*/
