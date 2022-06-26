@@ -1,0 +1,10 @@
+reporta_a(juan,pedro).
+reporta_a(carlos,juan).
+reporta_a(jose,carlos).
+
+recibeOrdenesDe(X,Y):-
+    reporta_a(X,Y).
+
+recibeOrdenesDe(X,Y):-
+    reporta_a(X,Z),
+    recibeOrdenesDe(Z,Y).
